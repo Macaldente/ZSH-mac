@@ -15,7 +15,6 @@ MacOS dotfiles und Konfigurationsdateien für ZSH, SSH und weitere Tools.
 | `.vimrc` | Vim-Konfiguration |
 | `.nanorc` | Nano-Konfiguration |
 | `config` | Weitere Konfigurationsdateien |
-| `ssh-config-docs.md` | SSH-Konfiguration und Verbindungsstatus |
 
 ---
 
@@ -49,22 +48,7 @@ stow --target=$HOME --dir=$HOME/Git/ZSH-mac .
 
 ## SSH-Konfiguration
 
-Die vollständige Dokumentation befindet sich in [`ssh-config-docs.md`](ssh-config-docs.md).
-
-### Schnellübersicht `~/.ssh/config`
-
-| Alias | Host | User |
-|---|---|---|
-| `pve` | Proxmox VE | root |
-| `server` | Fedora Server | master |
-| `lxc100` | Zoraxy (Reverse Proxy) | root |
-| `lxc101` | Portainer | root |
-| `lxc102` | CasaOS | root |
-| `lxc106` | Paperless-ngx | root |
-| `lxc109` | Cloudflare Tunnel | root |
-| `lxc110` | (reserviert) | root |
-| `lxc111` | AdguardHome | root |
-| `macbookpro` | RSI MacBook | root |
+Die `~/.ssh/config` enthält Host-Aliase für alle Remote-Systeme.
 
 ### Globale Einstellung (Locale-Fix)
 
@@ -74,12 +58,4 @@ Dies wird in `~/.ssh/config` global unterdrückt:
 ```ssh-config
 Host *
     SendEnv -LANG -LC_*
-```
-
-### Verbindung testen
-
-```zsh
-ssh pve
-ssh server
-ssh lxc100
 ```
