@@ -3,7 +3,11 @@
 # ======================
 
 # --- PATH initializer
-export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:/opt/homebrew/opt/libxml2/bin:$PATH"
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+
+# Homebrew formulae with custom paths
+export PATH="/opt/homebrew/opt/libxml2/bin:$PATH"
+export PATH="/opt/homebrew/opt/ffmpeg-full/bin:$PATH"
 
 # --- Plugin manager (Antidote)
 ANTIDOTE_DIR="${HOME}/.zsh/antidote"
@@ -116,3 +120,7 @@ fi
 # --- End of .zshrc ++++++++
 export HOMEBREW_NO_ENV_HINTS=1
 export PATH="$HOME/.local/bin:$PATH"
+
+# Locale settings
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
