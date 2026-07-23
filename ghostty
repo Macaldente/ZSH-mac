@@ -1,0 +1,28 @@
+meister   ~/.config/ghostty
+zsh ➜ ls -la "$HOME/Library/Application Support/com.mitchellh.ghostty/"
+drwxr-xr-x@    - aldente 30 Oct  2025  .
+drwx------     - aldente  9 Jul 21:36  ..
+.rw-r--r--@ 1.9k aldente 30 Oct  2025 󱁻 config
+
+meister   ~/.config/ghostty
+zsh ➜ rm "$HOME/Library/Application Support/com.mitchellh.ghostty/config"
+
+meister   ~/.config/ghostty
+zsh ➜ ls -la "$HOME/Library/Application Support/com.mitchellh.ghostty/"
+drwxr-xr-x@ - aldente 23 Jul 21:52  .
+drwx------  - aldente  9 Jul 21:36  ..
+
+meister   ~/.config/ghostty
+zsh ➜ ghostty +show-config | grep -E "theme|font-size|window-width|window-height"
+font-size = 18
+theme = Catppuccin Mocha
+window-height = 46
+window-width = 110
+
+meister   ~/.config/ghostty
+zsh ➜ mkdir -p "$HOME/Library/Application Support/com.mitchellh.ghostty"
+
+
+meister   ~/.config/ghostty
+zsh ➜ ln -sf "$HOME/.config/ghostty/config" \
+"$HOME/Library/Application Support/com.mitchellh.ghostty/config"
