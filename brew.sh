@@ -1,0 +1,7 @@
+# within ~/.homebrew/ directory
+
+HOMEBREW_NO_ENV_HINTS=1
+HOMEBREW_BAT=1
+HOMEBREW_NO_ANALYTICS=1
+HOMEBREW_NO_AUTO_UPDATE=1
+HOMEBREW_CASK_OPTS="--appdir=~/Applications"
