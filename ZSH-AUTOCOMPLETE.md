@@ -173,7 +173,9 @@ When adding one:
 > That check always reports failure even on a perfectly working install, and is
 > the single most common false alarm with this plugin.
 
-Correct checks, run in an **interactive** shell:
+Correct checks — **type these at a prompt**, do not run them via `zsh -c`.
+`zsh -c` never renders a prompt, so the `precmd` hook never fires, `compinit`
+never runs, and `${#_comps}` misreports `0` on a perfectly healthy setup:
 
 ```sh
 # plugin actually loaded
