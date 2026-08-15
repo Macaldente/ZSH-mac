@@ -22,10 +22,10 @@ ZSH_PLUGINS_FILE="${ZDOTDIR:-$HOME}/.zsh_plugins.txt"
 if [[ ! -f "$ZSH_PLUGINS_FILE" ]]; then
   cat > "$ZSH_PLUGINS_FILE" <<'EOF'
 marlonrichert/zsh-autocomplete
-zsh-users/zsh-autosuggestions
 mafredri/zsh-async
-zsh-users/zsh-syntax-highlighting
+zsh-users/zsh-autosuggestions
 Aloxaf/fzf-tab
+zsh-users/zsh-syntax-highlighting
 EOF
 fi
 
@@ -38,9 +38,10 @@ setopt HIST_VERIFY
 setopt HIST_IGNORE_ALL_DUPS
 
 # --- Completion cache
-export ZCOMPDUMP="${ZDOTDIR:-$HOME}/.cache/zsh/zcompdump"
+# NOTE: zsh-autocomplete runs compinit itself and stubs it out afterwards.
+# Upstream requires that we do NOT call compinit here. It honours $ZSH_COMPDUMP.
+export ZSH_COMPDUMP="${ZDOTDIR:-$HOME}/.cache/zsh/zcompdump"
 mkdir -p "${ZDOTDIR:-$HOME}/.cache/zsh"
-autoload -Uz compinit && compinit -d "$ZCOMPDUMP"
 
 # --- Plugin loader
 ZSH_AUTOSUGGEST_STRATEGY=( history )
@@ -52,9 +53,15 @@ eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 
 # FZF configuration file
+# Keep Ctrl+T (files) and Alt+C (dirs). Ctrl+R is owned by atuin further below.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 if command -v fzf >/dev/null 2>&1; then
   eval "$(fzf --zsh)" 2>/dev/null || true
+  # fzf's shell integration steals Tab for `fzf-completion`; hand it back to fzf-tab.
+  if (( $+widgets[fzf-tab-complete] )); then
+    bindkey -M emacs '^I' fzf-tab-complete
+    bindkey -M viins '^I' fzf-tab-complete
+  fi
 fi
 
 # --- Alias section
@@ -109,18 +116,25 @@ ytv() {
 }
 
 # --- Nearly finished
+# Atuin: opt out of its default keymap so it cannot take the Up arrow away from
+# zsh-autocomplete's history menu. Atuin keeps Ctrl+R only.
 . "$HOME/.atuin/bin/env"
+export ATUIN_NOBIND=true
 eval "$(atuin init zsh)"
+bindkey -M emacs '^R' atuin-search
+bindkey -M viins '^R' atuin-search
 
 # --- PATH finish
 if [[ -d /usr/local/bin/podman ]]; then
   export PATH="$PATH:/usr/local/bin/podman"
 fi
 
-# --- End of .zshrc ++++++++
-export HOMEBREW_NO_ENV_HINTS=1
 export PATH="$HOME/.local/bin:$PATH"
 
 # Locale settings
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
+
+# Load local secrets (API keys, etc.)
+[ -f ~/.secrets ] && source ~/.secrets
+# --- End of .zshrc ++++++++

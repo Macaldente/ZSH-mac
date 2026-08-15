@@ -1,5 +1,5 @@
 marlonrichert/zsh-autocomplete
-zsh-users/zsh-autosuggestions
 mafredri/zsh-async
-aloxaf/fzf-tab
+zsh-users/zsh-autosuggestions
+Aloxaf/fzf-tab
 zsh-users/zsh-syntax-highlighting

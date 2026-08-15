@@ -11,6 +11,7 @@ MacOS dotfiles und Konfigurationsdateien für ZSH, SSH und weitere Tools.
 | `.zshrc` | ZSH-Konfiguration (Antidote-basiert) |
 | `.zsh_plugins.txt` | Antidote Plugin-Liste |
 | `.zsh_plugins.zsh` | Generierte Antidote Plugin-Datei |
+| `ZSH-AUTOCOMPLETE.md` | Ladereihenfolge, `compinit`-Regel und Tastenbelegung (Tab / ↑ / Ctrl+R) |
 | `starship.toml` | Starship Prompt-Konfiguration |
 | `.vimrc` | Vim-Konfiguration |
 | `.nanorc` | Nano-Konfiguration |
