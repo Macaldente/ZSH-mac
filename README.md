@@ -1,4 +1,4 @@
-# ZSH-mac
+# ZSH-Mac
 
 MacOS dotfiles und Konfigurationsdateien für ZSH, SSH und weitere Tools.
 
@@ -42,7 +42,7 @@ brew install --cask ghostty ungoogled-chromium raycast soundanchor timemachineed
 
 Dateien mit `stow` ins Home-Verzeichnis symlinken:
 ```zsh
-stow --target=$HOME --dir=$HOME/Git/ZSH-mac .
+stow --target=$HOME --dir=$HOME/Git/ZSH-Mac .
 ```
 
 ---
@@ -129,3 +129,16 @@ Dies wird in `~/.ssh/config` global unterdrückt:
 Host *
     SendEnv -LANG -LC_*
 ```
+
+---
+
+## Changelog
+
+- **2026-08-16** — Repository von `ZSH-mac` in `ZSH-Mac` umbenannt (Konsistenz mit `ZSH-Linux`).
+- **2026-08-16** — `~/.atuin/bin/env`-Sourcing in `.zshrc` mit einer Existenzprüfung
+  abgesichert (`[ -f "$HOME/.atuin/bin/env" ] && . "$HOME/.atuin/bin/env"`).
+  Diese Datei wird nur vom offiziellen Atuin-Install-Skript angelegt, nicht von
+  Homebrew — die hier dokumentierte Installationsmethode (`brew install ... atuin`)
+  erzeugt sie also nicht, wodurch die Zeile bei jedem Shell-Start einen Fehler
+  auslöste. Der Fix wurde zuerst in `ZSH-Linux` gefunden und dort interaktiv
+  verifiziert, dann hierher zurückportiert.
