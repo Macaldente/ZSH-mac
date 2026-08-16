@@ -118,7 +118,10 @@ ytv() {
 # --- Nearly finished
 # Atuin: opt out of its default keymap so it cannot take the Up arrow away from
 # zsh-autocomplete's history menu. Atuin keeps Ctrl+R only.
-. "$HOME/.atuin/bin/env"
+# ~/.atuin/bin/env only exists when atuin was installed via the official
+# install script rather than Homebrew; guard it so Homebrew-only installs
+# don't error on every shell start.
+[ -f "$HOME/.atuin/bin/env" ] && . "$HOME/.atuin/bin/env"
 export ATUIN_NOBIND=true
 eval "$(atuin init zsh)"
 bindkey -M emacs '^R' atuin-search
